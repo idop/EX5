@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex05_Logic", "Ex05_Logic\Ex05_Logic.csproj", "{C6DE433F-F340-42FB-A2C5-2C5CFF3AC00B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex05_WinformUi", "Ex05_WinformUi\Ex05_WinformUi.csproj", "{1988E233-4430-4CF9-AD80-7CF3AB48820C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex05_GameUtils", "Ex05_GameUtils\Ex05_GameUtils.csproj", "{D098FB85-82AB-4EA7-A83E-DF399B46446F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6DE433F-F340-42FB-A2C5-2C5CFF3AC00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6DE433F-F340-42FB-A2C5-2C5CFF3AC00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6DE433F-F340-42FB-A2C5-2C5CFF3AC00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6DE433F-F340-42FB-A2C5-2C5CFF3AC00B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1988E233-4430-4CF9-AD80-7CF3AB48820C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1988E233-4430-4CF9-AD80-7CF3AB48820C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1988E233-4430-4CF9-AD80-7CF3AB48820C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1988E233-4430-4CF9-AD80-7CF3AB48820C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D098FB85-82AB-4EA7-A83E-DF399B46446F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D098FB85-82AB-4EA7-A83E-DF399B46446F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D098FB85-82AB-4EA7-A83E-DF399B46446F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D098FB85-82AB-4EA7-A83E-DF399B46446F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
