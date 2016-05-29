@@ -2,11 +2,11 @@
 using Ex05_GameUtils;
 namespace Ex05_WinformUi
 {
-    internal class GameManager
+    public class GameManager
     {
         private const int k_NumberOfPlayers = 2;
         private GameBoard m_GameBoard;
-        private UiManager m_UiManager = new UiManager();
+        //private UiManager m_UiManager = new UiManager();
         private GameUtils.eGameMode m_GameMode;
         private int m_TurnNumber = 0;
         private bool m_PlayerWantsToPlay = true;
@@ -16,27 +16,27 @@ namespace Ex05_WinformUi
         public void Start()
         {
             init();
-            m_UiManager.RenderScreen(m_GameBoard);
+            //m_UiManager.RenderScreen(m_GameBoard);
             playGame();
         }
 
         private void init()
         {
-            initializeGameBoard();
-            initializeGameMode();
+            //initializeGameBoard();
+            //initializeGameMode();
             initializePlayers();
         }
 
-        private void initializeGameBoard()
+        private void initializeGameBoard(int rows,int columns)
         {
-            int rows, columns;
-            m_UiManager.GetBoardDimensions(out rows, out columns);
-            m_GameBoard = new GameBoard(rows, columns);
+            //    int rows, columns;
+            //    m_UiManager.GetBoardDimensions(out rows, out columns);
+            //    m_GameBoard = new GameBoard(rows, columns);
         }
 
         private void initializeGameMode()
         {
-            m_UiManager.GetGameMode(ref m_GameMode);
+            //m_UiManager.GetGameMode(ref m_GameMode);
         }
 
         private void initializePlayers()
@@ -52,7 +52,7 @@ namespace Ex05_WinformUi
                 while (!m_CurrentGameEnded)
                 {
                     playTurn();
-                    m_UiManager.RenderScreen(m_GameBoard);
+                    //m_UiManager.RenderScreen(m_GameBoard);
                     checkBoardStatus();
                     ++m_TurnNumber;
                 }
@@ -70,14 +70,14 @@ namespace Ex05_WinformUi
                 {
                     if (boardStatus == GameBoard.eBoardStatus.PlayerWon)
                     {
-                        m_Players[m_TurnNumber % 2].Score++;
-                        m_UiManager.DeclareWinner(m_Players[m_TurnNumber % 2].Name);
-                        m_UiManager.PresentCurrentScore(m_Players[0].Name, m_Players[0].Score, m_Players[1].Name, m_Players[1].Score);
+                        //m_Players[m_TurnNumber % 2].Score++;
+                        //m_UiManager.DeclareWinner(m_Players[m_TurnNumber % 2].Name);
+                        //m_UiManager.PresentCurrentScore(m_Players[0].Name, m_Players[0].Score, m_Players[1].Name, m_Players[1].Score);
                     }
                     else if (boardStatus == GameBoard.eBoardStatus.Draw)
                     {
-                        m_UiManager.DeclareDraw();
-                        m_UiManager.PresentCurrentScore(m_Players[0].Name, m_Players[0].Score, m_Players[1].Name, m_Players[1].Score);
+                        //m_UiManager.DeclareDraw();
+                        //m_UiManager.PresentCurrentScore(m_Players[0].Name, m_Players[0].Score, m_Players[1].Name, m_Players[1].Score);
                     }
 
                     m_CurrentGameEnded = true;
@@ -86,15 +86,15 @@ namespace Ex05_WinformUi
             else
             {
                 m_Players[(m_TurnNumber + 1) % 2].Score++;
-                m_UiManager.DeclareForfit(m_Players[m_TurnNumber % 2].Name);
-                m_UiManager.PresentCurrentScore(m_Players[0].Name, m_Players[0].Score, m_Players[1].Name, m_Players[1].Score);
+                //m_UiManager.DeclareForfit(m_Players[m_TurnNumber % 2].Name);
+                //m_UiManager.PresentCurrentScore(m_Players[0].Name, m_Players[0].Score, m_Players[1].Name, m_Players[1].Score);
                 m_CurrentGameEnded = true;
             }
         }
 
         private void checkIfPlayerWantsToPlayAnotherGame()
         {
-            m_PlayerWantsToPlay = m_UiManager.CheckIfPplayerWantsToPlayAnotherGame();
+            //m_PlayerWantsToPlay = m_UiManager.CheckIfPplayerWantsToPlayAnotherGame();
             if (m_PlayerWantsToPlay)
             {
                 playAnotherLevel();
@@ -116,7 +116,7 @@ namespace Ex05_WinformUi
         private void playHumanTurn()
         {
             GameBoard.eBoardSquare playerSquare = m_TurnNumber % 2 == 0 ? GameBoard.eBoardSquare.Player1Square : GameBoard.eBoardSquare.Player2Square;
-            m_PlayerWantsToPlay = m_UiManager.GetMoveFormUser(m_Players[m_TurnNumber % 2].Name, playerSquare, m_GameBoard);
+            //m_PlayerWantsToPlay = m_UiManager.GetMoveFormUser(m_Players[m_TurnNumber % 2].Name, playerSquare, m_GameBoard);
         }
 
         private void playComputerTurn()
@@ -131,7 +131,7 @@ namespace Ex05_WinformUi
             m_TurnNumber = 0;
             m_CurrentGameEnded = false;
             m_GameBoard.ClearBoard();
-            m_UiManager.RenderScreen(m_GameBoard);
+            //m_UiManager.RenderScreen(m_GameBoard);
         }
     }
 }

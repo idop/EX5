@@ -39,7 +39,7 @@ namespace Ex05_GameUtils
         public TreeNode(T data, int index)
         {
             this.Data = data;
-            this.Children = new LinkedList<TreeNode<T>>();
+            this.Children = new List<TreeNode<T>>();
             Index = index;
             Score = 0;
         }

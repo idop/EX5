@@ -4,8 +4,8 @@
     {
         public static void Main()
         {
-            GameManager game = new GameManager();
-            game.Start();
+            Controller controller = new Controller();
+            controller.Start();
         }
     }
 }
