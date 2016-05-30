@@ -52,6 +52,8 @@ namespace Ex05_WinformUi
             m_LabelPlayer2.Text = "Player 2:";
             m_LabelPlayer2.Location = new Point(m_LabelPlayer1.Location.X, m_LabelPlayer1.Location.Y + 30);
             m_TextBoxPlayer2.Location = new Point(m_TextBoxPlayer1.Location.X, m_LabelPlayer2.Location.Y);
+            m_TextBoxPlayer2.Text = "[Computer]";
+            m_TextBoxPlayer2.Enabled = false;
             m_CheckBoxPlayerHuman.Location = new Point(m_LabelPlayer2.Location.X - 20, m_LabelPlayer2.Location.Y - 5);
             m_LabelBoardSize.Font = m_LabelPlayers.Font;
             m_LabelBoardSize.Text = "Board Size:";
