@@ -32,13 +32,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.TextBoxPlayer1 = new System.Windows.Forms.TextBox();
+            this.TextBoxPlayer2 = new System.Windows.Forms.TextBox();
+            this.CheckBoxIsHuman = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ButtonStart = new System.Windows.Forms.Button();
             this.nUDRows = new System.Windows.Forms.NumericUpDown();
             this.nUDCols = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.nUDRows)).BeginInit();
@@ -60,21 +60,22 @@
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
             // 
-            // textBox1
+            // TextBoxPlayer1
             // 
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
+            resources.ApplyResources(this.TextBoxPlayer1, "TextBoxPlayer1");
+            this.TextBoxPlayer1.Name = "TextBoxPlayer1";
             // 
-            // textBox2
+            // TextBoxPlayer2
             // 
-            resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.Name = "textBox2";
+            resources.ApplyResources(this.TextBoxPlayer2, "TextBoxPlayer2");
+            this.TextBoxPlayer2.Name = "TextBoxPlayer2";
             // 
-            // checkBox1
+            // CheckBoxIsHuman
             // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.CheckBoxIsHuman, "CheckBoxIsHuman");
+            this.CheckBoxIsHuman.Name = "CheckBoxIsHuman";
+            this.CheckBoxIsHuman.UseVisualStyleBackColor = true;
+            this.CheckBoxIsHuman.CheckedChanged += new System.EventHandler(this.CheckBoxIsHuman_CheckedChanged);
             // 
             // label4
             // 
@@ -91,11 +92,12 @@
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
             // 
-            // button1
+            // ButtonStart
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.ButtonStart, "ButtonStart");
+            this.ButtonStart.Name = "ButtonStart";
+            this.ButtonStart.UseVisualStyleBackColor = true;
+            this.ButtonStart.Click += new System.EventHandler(this.ButtonStart_Click);
             // 
             // nUDRows
             // 
@@ -139,20 +141,22 @@
             // 
             // Settings
             // 
+            this.AcceptButton = this.ButtonStart;
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.nUDCols);
             this.Controls.Add(this.nUDRows);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ButtonStart);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.CheckBoxIsHuman);
+            this.Controls.Add(this.TextBoxPlayer2);
+            this.Controls.Add(this.TextBoxPlayer1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Settings";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             ((System.ComponentModel.ISupportInitialize)(this.nUDRows)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDCols)).EndInit();
             this.ResumeLayout(false);
@@ -165,13 +169,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox TextBoxPlayer1;
+        private System.Windows.Forms.TextBox TextBoxPlayer2;
+        private System.Windows.Forms.CheckBox CheckBoxIsHuman;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ButtonStart;
         private System.Windows.Forms.NumericUpDown nUDRows;
         private System.Windows.Forms.NumericUpDown nUDCols;
     }
