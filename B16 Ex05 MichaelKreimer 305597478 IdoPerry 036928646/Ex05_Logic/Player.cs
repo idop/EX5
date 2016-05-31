@@ -1,6 +1,6 @@
 ﻿namespace Ex05_Logic
 {
-    internal class Player
+    public class Player
     {
         private string m_Name;
         private byte m_Score;

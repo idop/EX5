@@ -15,6 +15,42 @@ namespace Ex05_WinformUi
             InitializeComponent();
         }
 
+        public string Player1Name
+        {
+            get
+            {
+                return TextBoxPlayer1.Text;
+            }
+        }
+        public string Player2Name
+        {
+            get
+            {
+                return TextBoxPlayer2.Text;
+            }
+        }
+        public int Rows
+        {
+            get
+            {
+                return (int)nUDRows.Value;
+            }
+        }
+        public int Cols
+        {
+            get
+            {
+                return (int)nUDCols.Value;
+            }
+        }
+        public bool HumanPlaying
+        {
+            get
+            {
+                return CheckBoxIsHuman.Checked;
+            }
+        }
+
         private void CheckBoxIsHuman_CheckedChanged(object sender, EventArgs e)
         {
             if (this.CheckBoxIsHuman.Checked)
