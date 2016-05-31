@@ -50,6 +50,12 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsOld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsOld.Designer.cs">
+      <DependentUpon>SettingsOld.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +67,14 @@
       <Project>{c6de433f-f340-42fb-a2c5-2c5cff3ac00b}</Project>
       <Name>Ex05_Logic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsOld.resx">
+      <DependentUpon>SettingsOld.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

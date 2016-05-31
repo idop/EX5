@@ -11,6 +11,8 @@ namespace Ex05_WinformUi
         internal void Start()
         {
             //m_GameManager.Start();
+            //SettingsOld settings = new SettingsOld();
+            //settings.ShowDialog();
             Settings settings = new Settings();
             settings.ShowDialog();
         }
