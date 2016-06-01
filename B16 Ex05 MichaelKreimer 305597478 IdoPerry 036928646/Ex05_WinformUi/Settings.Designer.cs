@@ -41,6 +41,7 @@
             this.ButtonStart = new System.Windows.Forms.Button();
             this.nUDRows = new System.Windows.Forms.NumericUpDown();
             this.nUDCols = new System.Windows.Forms.NumericUpDown();
+            this.LabelError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nUDRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDCols)).BeginInit();
             this.SuspendLayout();
@@ -139,10 +140,18 @@
             0,
             0});
             // 
+            // LabelError
+            // 
+            resources.ApplyResources(this.LabelError, "LabelError");
+            this.LabelError.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.LabelError.ForeColor = System.Drawing.Color.Red;
+            this.LabelError.Name = "LabelError";
+            // 
             // Settings
             // 
             this.AcceptButton = this.ButtonStart;
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.LabelError);
             this.Controls.Add(this.nUDCols);
             this.Controls.Add(this.nUDRows);
             this.Controls.Add(this.ButtonStart);
@@ -178,5 +187,6 @@
         private System.Windows.Forms.Button ButtonStart;
         private System.Windows.Forms.NumericUpDown nUDRows;
         private System.Windows.Forms.NumericUpDown nUDCols;
+        private System.Windows.Forms.Label LabelError;
     }
 }

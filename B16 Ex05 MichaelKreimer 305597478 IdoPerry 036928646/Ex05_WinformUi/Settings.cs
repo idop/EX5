@@ -67,7 +67,42 @@ namespace Ex05_WinformUi
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            try
+            {
+                checkLegalSettings();
+            }
+            //catch (ArgumentOutOfRangeException)
+            //{
+            //    LabelError.Text = "Board size is not legal";
+            //    LabelError.Visible = true;
+            //}
+            catch (ArgumentException)
+            {
+                LabelError.Text = "Names are not legal";
+                LabelError.Visible = true;
+            }
+        }
+
+        private void checkLegalSettings()
+        {
+            if (!isLegalSize(Rows) || !isLegalSize(Cols))
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else if (!isLegalNames())
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        private bool isLegalSize(int num)
+        {
+            return num >= 4 && num <= 10;
+        }
+
+        private bool isLegalNames()
+        {
+            return (Player1Name != null && Player2Name != null && Player1Name != Player2Name);
         }
     }
 }
