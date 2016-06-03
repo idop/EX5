@@ -6,6 +6,8 @@ namespace Ex05_WinformUi
     {
         public static void Main()
         {
+            FormGame f = new FormGame(4, 4);
+            f.ShowDialog();
             GameManager gameManager = new GameManager();
             gameManager.Start();
         }
