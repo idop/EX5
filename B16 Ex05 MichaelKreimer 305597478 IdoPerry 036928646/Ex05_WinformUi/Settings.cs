@@ -10,60 +10,99 @@ namespace Ex05_WinformUi
 {
     public partial class Settings : Form
     {
-        Button m_ButtonStart = new Button();
-        Label m_LabelPlayers = new Label();
-        Label m_LabelPlayer1 = new Label();
-        Label m_LabelPlayer2 = new Label();
-        Label m_LabelBoardSize = new Label();
-        Label m_LabelCols = new Label();
-        Label m_LabelRows = new Label();
-        TextBox m_TBPlayer1 = new TextBox();
-        TextBox m_TBPlayer2 = new TextBox();
-        CheckBox m_CBPlayerHuman = new CheckBox();
-        NumericUpDown m_NUDRows = new NumericUpDown();
-        NumericUpDown m_NUDCols = new NumericUpDown();
         public Settings()
         {
-            this.Text = "Game Settings";
-            this.FormBorderStyle = FormBorderStyle.Fixed3D;
-            this.StartPosition = FormStartPosition.CenterScreen;
-            m_LabelPlayers.Text = "Players:";
-            m_ButtonStart.Text = "Start";
-        }
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            this.Text = "Game Settings";
-            this.Size = new Size(300, 300);
-            InitControls();
+            InitializeComponent();
         }
 
-        private void InitControls()
+        public string Player1Name
         {
-            initControl(m_ButtonStart, "Start!", Size.Width - 100, Size.Height - 70);
-            initControl(m_LabelPlayers, "Players:", 20, 10);
-            m_LabelPlayers.Font = new Font("Arial", 10, FontStyle.Bold);
-            initControl(m_LabelPlayer1, "Player 1:", m_LabelPlayers.Location.X + 30, m_LabelPlayers.Location.Y + 30);
-            initControl(m_TBPlayer1, String.Empty, m_LabelPlayer1.Location.X + 100, m_LabelPlayer1.Location.Y);
-            initControl(m_LabelPlayer2, "Player 2:", m_LabelPlayer1.Location.X, m_LabelPlayer1.Location.Y + 30);
-            initControl(m_TBPlayer2, "[Computer]", m_TBPlayer1.Location.X, m_LabelPlayer2.Location.Y);
-            m_TBPlayer2.Enabled = false;
-            initControl(m_CBPlayerHuman, String.Empty, m_LabelPlayer2.Location.X - 20, m_LabelPlayer2.Location.Y - 5);
-            initControl(m_LabelBoardSize, "Board Size:", m_LabelPlayers.Location.X, Size.Height / 3);
-            m_LabelBoardSize.Font = m_LabelPlayers.Font;
-            initControl(m_LabelRows, "Rows:", m_LabelBoardSize.Location.X + 25, m_LabelBoardSize.Location.Y + 30);
-            initControl(m_LabelCols, "Cols:", m_LabelRows.Location.X + 150, m_LabelRows.Location.Y);
-            initControl(m_NUDCols, String.Empty, m_LabelCols.Location.X, m_LabelCols.Location.Y + 25);
-            initControl(m_NUDRows, String.Empty, m_LabelRows.Location.X, m_LabelRows.Location.Y + 25);
-            m_NUDCols.Minimum = m_NUDRows.Minimum = 4;
-            m_NUDCols.Size = m_NUDRows.Size = new Size(40, 20);
-            m_NUDCols.Maximum = m_NUDRows.Maximum = 8;
+            get
+            {
+                return TextBoxPlayer1.Text;
+            }
         }
-        private void initControl(Control i_Label, string i_Text,int x,int y)
+        public string Player2Name
         {
-            i_Label.Text = i_Text;
-            i_Label.Location = new Point(x, y);
-            Controls.Add(i_Label);
+            get
+            {
+                return TextBoxPlayer2.Text;
+            }
+        }
+        public int Rows
+        {
+            get
+            {
+                return (int)nUDRows.Value;
+            }
+        }
+        public int Cols
+        {
+            get
+            {
+                return (int)nUDCols.Value;
+            }
+        }
+        public bool HumanPlaying
+        {
+            get
+            {
+                return CheckBoxIsHuman.Checked;
+            }
+        }
+
+        private void CheckBoxIsHuman_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.CheckBoxIsHuman.Checked)
+            {
+                TextBoxPlayer2.Enabled = true;
+                TextBoxPlayer2.Text = String.Empty;
+            }
+            else 
+            {
+                TextBoxPlayer2.Enabled = false;
+                TextBoxPlayer2.Text = "[Computer]";
+            }
+        }
+
+        private void ButtonStart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                checkLegalSettings();
+            }
+            //catch (ArgumentOutOfRangeException)
+            //{
+            //    LabelError.Text = "Board size is not legal";
+            //    LabelError.Visible = true;
+            //}
+            catch (ArgumentException)
+            {
+                LabelError.Text = "Names are not legal";
+                LabelError.Visible = true;
+            }
+        }
+
+        private void checkLegalSettings()
+        {
+            if (!isLegalSize(Rows) || !isLegalSize(Cols))
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else if (!isLegalNames())
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        private bool isLegalSize(int num)
+        {
+            return num >= 4 && num <= 10;
+        }
+
+        private bool isLegalNames()
+        {
+            return (Player1Name != null && Player2Name != null && Player1Name != Player2Name);
         }
     }
 }

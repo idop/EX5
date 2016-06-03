@@ -3,7 +3,7 @@ using Ex05_GameUtils;
 
 namespace Ex05_Logic
 {
-    internal class Ai
+    public class Ai
     {
         private TreeNode<GameBoard> root;
 

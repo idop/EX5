@@ -1,11 +1,13 @@
-﻿namespace Ex05_WinformUi
+﻿using B16_Ex05;
+
+namespace Ex05_WinformUi
 {
     public class Program
     {
         public static void Main()
         {
-            Controller controller = new Controller();
-            controller.Start();
+            GameManager gameManager = new GameManager();
+            gameManager.Start();
         }
     }
 }
