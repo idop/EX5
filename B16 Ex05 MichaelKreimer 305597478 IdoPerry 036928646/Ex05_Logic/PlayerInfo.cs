@@ -1,13 +1,13 @@
 ﻿namespace Ex05_Logic
 {
-    public class Player
+    public class PlayerInfo
     {
         private string m_Name;
-        private byte m_Score;
+        private int m_Score;
 
-        public Player(int playerNumber)
+        public PlayerInfo(string i_PlayerName)
         {
-            m_Name = "Player " + (playerNumber + 1);
+            m_Name = i_PlayerName;
             m_Score = 0;
         }
 
@@ -28,12 +28,12 @@
         {
             get
             {
-                return (int)m_Score;
+                return m_Score;
             }
 
             set
             {
-                m_Score = (byte)value;
+                m_Score = value;
             }
         }
     }

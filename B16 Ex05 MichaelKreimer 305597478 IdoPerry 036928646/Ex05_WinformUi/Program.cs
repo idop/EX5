@@ -1,4 +1,5 @@
-﻿using B16_Ex05;
+﻿
+using Ex05_Logic;
 
 namespace Ex05_WinformUi
 {
@@ -6,10 +7,8 @@ namespace Ex05_WinformUi
     {
         public static void Main()
         {
-            FormGame f = new FormGame(4, 4);
-            f.ShowDialog();
-            GameManager gameManager = new GameManager();
-            gameManager.Start();
+            FormGame game = new FormGame();
+            game.ShowDialog();
         }
     }
 }

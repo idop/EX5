@@ -26,7 +26,7 @@ namespace Ex05_WinformUi
         {
             get
             {
-                return TextBoxPlayer2.Text;
+                return CheckBoxIsHuman.Checked ? TextBoxPlayer2.Text: "Computer";
             }
         }
         public int Rows
@@ -67,7 +67,8 @@ namespace Ex05_WinformUi
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
-            try
+            this.Close();
+            /* try
             {
                 checkLegalSettings();
             }
@@ -80,7 +81,7 @@ namespace Ex05_WinformUi
             {
                 LabelError.Text = "Names are not legal";
                 LabelError.Visible = true;
-            }
+            }*/
         }
 
         private void checkLegalSettings()

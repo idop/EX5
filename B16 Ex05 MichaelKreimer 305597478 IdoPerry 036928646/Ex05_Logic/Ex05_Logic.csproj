@@ -37,13 +37,17 @@
   <ItemGroup>
     <Compile Include="Ai.cs" />
     <Compile Include="GameBoard.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="PlayerInfo.cs" />
+    <Compile Include="PlayerMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ex05_GameUtils\Ex05_GameUtils.csproj">
       <Project>{d098fb85-82ab-4ea7-a83e-df399b46446f}</Project>
       <Name>Ex05_GameUtils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -125,22 +125,29 @@ namespace Ex05_Logic
             m_BoardStatus = eBoardStatus.NextPlayerCanPlay;
         }
 
+        public int SetColumnSquare(int i_ColumnIndex, eBoardSquare i_PlayerSquare)
+        {
+            int currentRow = m_CurrentEmptyRowInColumn[i_ColumnIndex] - 1;
+            m_GameBoard[currentRow, i_ColumnIndex] = i_PlayerSquare;
+            --m_NumberOfEmptySquares;
+            setNewBoardStatus(i_ColumnIndex);
+            --m_CurrentEmptyRowInColumn[i_ColumnIndex];
+            return currentRow;
+        }
+
         public bool TryToSetColumnSquare(int i_ColumnIndex, eBoardSquare i_PlayerSquare)
         {
-            bool isColumnFull = true;
+            bool SetColumnSucceded = true;
             if (isValidColumn(i_ColumnIndex))
             {
-                if (m_CurrentEmptyRowInColumn[i_ColumnIndex] > 0)
+                if (!IsColumnFull(i_ColumnIndex))
                 {
-                    m_GameBoard[m_CurrentEmptyRowInColumn[i_ColumnIndex] - 1, i_ColumnIndex] = i_PlayerSquare;
-                    --m_NumberOfEmptySquares;
-                    setNewBoardStatus(i_ColumnIndex);
-                    --m_CurrentEmptyRowInColumn[i_ColumnIndex];
-                    isColumnFull = false;
+                    SetColumnSquare(i_ColumnIndex, i_PlayerSquare);
+                    SetColumnSucceded = false;
                 }
             }
 
-            return isColumnFull;
+            return SetColumnSucceded;
         }
 
         private void setNewBoardStatus(int i_LastInsertedColumn)
@@ -154,6 +161,11 @@ namespace Ex05_Logic
             {
                 m_BoardStatus = eBoardStatus.Draw;
             }
+        }
+
+        public bool IsColumnFull(int i_ColumnIndex)
+        {
+            return m_CurrentEmptyRowInColumn[i_ColumnIndex] == 0;
         }
 
         private bool checkIfPlayerWon(int i_LastInsertedColumn)
