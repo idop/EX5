@@ -193,6 +193,12 @@ namespace Ex05_WinformUi
         {
             m_GameManager.ResetGame();
             resetButtonsColumnsSelect();
+            resetButtonsBoardPiece();
+
+        }
+
+        private void resetButtonsBoardPiece()
+        {
             for (int i = m_NumberOfRows - 1; i >= 0; --i)
             {
                 for (int j = m_NumberOfColumns - 1; j >= 0; --j)
@@ -201,7 +207,6 @@ namespace Ex05_WinformUi
 
                 }
             }
-
         }
 
         private void resetButtonsColumnsSelect()
