@@ -162,17 +162,16 @@ namespace Ex05_WinformUi
 
         private void checkBoardStatus(GameBoard.eBoardStatus i_gameStatus)
         {
-
             if (i_gameStatus != GameBoard.eBoardStatus.NextPlayerCanPlay)
             {
                 DialogResult playerWantsToPlayAgain;
                 if (i_gameStatus == GameBoard.eBoardStatus.PlayerWon)
                 {
                     int playerNumber = m_TurnNumber % 2;
-                    m_PlayersInfo[playerNumber].Score += 1;
-                    m_LabelPlayerInfo[playerNumber].Text = m_PlayersInfo[playerNumber].ToString();
-                    this.Refresh();
                     playerWantsToPlayAgain = declareWinner(m_PlayersInfo[playerNumber].Name);
+                    m_PlayersInfo[playerNumber].Score += playerWantsToPlayAgain.Equals(DialogResult.Yes) ? 1 : 0;
+                    this.Refresh();
+                    m_LabelPlayerInfo[playerNumber].Text = m_PlayersInfo[playerNumber].ToString();
                 }
                 else
                 {
