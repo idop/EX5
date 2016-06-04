@@ -36,7 +36,7 @@ namespace Ex05_WinformUi
             m_FromSettings.ShowDialog();
             if (m_FromSettings.DialogResult == DialogResult.OK)
             {
-                initializeComponents();
+                InitializeComponents();
                 DialogResult = DialogResult.OK;
             }
             else
@@ -45,7 +45,7 @@ namespace Ex05_WinformUi
             }
         }
 
-        private void initizliseGameSettingsValues()
+        private void initializeGameSettingsValues()
         {
             m_NumberOfRows = m_FromSettings.Rows;
             m_NumberOfColumns = m_FromSettings.Cols;
@@ -83,9 +83,9 @@ namespace Ex05_WinformUi
             this.Controls.Add(m_LabelPlayerInfo[1]);
         }
 
-        private void initializeComponents()
+        private void InitializeComponents()
         {
-            initizliseGameSettingsValues();
+            initializeGameSettingsValues();
             initializeButtonsColumnsSelect();
             initializeButtonsBoardPiece();
             initializePlayerInfoLabels();
@@ -165,24 +165,24 @@ namespace Ex05_WinformUi
 
             if (i_gameStatus != GameBoard.eBoardStatus.NextPlayerCanPlay)
             {
+                DialogResult playerWantsToPlayAgain;
                 if (i_gameStatus == GameBoard.eBoardStatus.PlayerWon)
                 {
                     int playerNumber = m_TurnNumber % 2;
                     m_PlayersInfo[playerNumber].Score += 1;
                     m_LabelPlayerInfo[playerNumber].Text = m_PlayersInfo[playerNumber].ToString();
                     this.Refresh();
-                    DeclareWinner(m_PlayersInfo[playerNumber].Name);
-
+                    playerWantsToPlayAgain = declareWinner(m_PlayersInfo[playerNumber].Name);
                 }
-                else if (i_gameStatus == GameBoard.eBoardStatus.Draw)
+                else
                 {
-                    DeclareDraw();
+                    playerWantsToPlayAgain = declareDraw();
                 }
-                if (m_FormGameOver.DialogResult == DialogResult.Cancel)
+                if (playerWantsToPlayAgain == DialogResult.No)
                 {
                     Application.Exit();
                 }
-                else
+                else 
                 {
                     resetGame();
                 }
@@ -217,23 +217,24 @@ namespace Ex05_WinformUi
             }
         }
 
-        private void DeclareDraw()
+        private DialogResult declareDraw()
         {
-            m_FormGameOver.GameOverText = string.Format(
-        @"Tie!!
+            string drawMessage = String.Format(
+@"Tie!!
 Another Round?");
-            m_FormGameOver.ShowDialog();
+            DialogResult dialogResult = MessageBox.Show(drawMessage, "A Tie!", MessageBoxButtons.YesNo);
+            return dialogResult;
+
         }
 
-        private void DeclareWinner(string i_WinnerName)
+        private DialogResult declareWinner(string i_WinnerName)
         {
-            m_FormGameOver.GameOverText = string.Format(
-        @"{0} Won!!
+            string playerWonMessage = String.Format(
+ @"{0} Won!!
 Another Round?", i_WinnerName);
-            m_FormGameOver.ShowDialog();
+            DialogResult dialogResult = MessageBox.Show(playerWonMessage, "A Win!", MessageBoxButtons.YesNo);
+            return dialogResult;
         }
-
-
     }
 }
 
