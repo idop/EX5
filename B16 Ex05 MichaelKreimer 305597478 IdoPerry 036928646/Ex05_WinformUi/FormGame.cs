@@ -23,23 +23,26 @@ namespace Ex05_WinformUi
         private Button[,] buttonsBoardPiece;
         private Label[] m_LabelPlayerName;
         private Label[] m_LabelPlayerScore;
-        private int m_Player1Score;
-        private int m_Player2Score;
+        private int m_Player1Score = 0;
+        private int m_Player2Score = 0;
         private int m_NumberOfRows;
         private int m_NumberOfColumns;
         private int m_TurnNumber = 0;
-        private Settings m_FromSettings;
+        private FormSettings m_FromSettings;
+        private FormGameOver m_FormGameOver;
         private GameUtils.eGameMode m_GameMode;
         private GameManager m_GameManager;
+      
 
 
         public FormGame()
         {
-            m_FromSettings = new Settings();
+            m_FromSettings = new FormSettings();
+            m_FormGameOver = new FormGameOver();
             m_FromSettings.ShowDialog();
             if (m_FromSettings.DialogResult == DialogResult.OK)
             {
-                initializeComponents();
+                initializeComponent();
                 DialogResult = DialogResult.OK;
             }
             else
@@ -52,8 +55,6 @@ namespace Ex05_WinformUi
         {
             m_NumberOfRows = m_FromSettings.Rows;
             m_NumberOfColumns = m_FromSettings.Cols;
-            m_Player1Score = 0;
-            m_Player2Score = 0;
             m_GameMode = m_FromSettings.HumanPlaying ? GameUtils.eGameMode.PlayerVsPlayer : GameUtils.eGameMode.PlayerVsAi;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -103,7 +104,7 @@ namespace Ex05_WinformUi
             this.Controls.Add(m_LabelPlayerScore[1]);
         }
 
-        private void initializeComponents()
+        private void initializeComponent()
         {
             initizliseGameSettingsValues();
             initializeButtonsColumnsSelect();
@@ -182,30 +183,58 @@ namespace Ex05_WinformUi
 
         private void checkBoardStatus(GameBoard.eBoardStatus i_gameStatus)
         {
+            string curPlayerName = m_LabelPlayerName[m_TurnNumber % 2].Text.TrimEnd(':');
 
             if (i_gameStatus != GameBoard.eBoardStatus.NextPlayerCanPlay)
             {
                 if (i_gameStatus == GameBoard.eBoardStatus.PlayerWon)
                 {
                     m_LabelPlayerScore[m_TurnNumber % 2].Text = string.Format("{0}",int.Parse(m_LabelPlayerScore[m_TurnNumber % 2].Text) +1);
-                    DeclareWinner(m_LabelPlayerName[m_TurnNumber % 2].Text);
+                    DeclareWinner(curPlayerName);
+                    increasePlayerScore(curPlayerName);
 
                 }
                 else if (i_gameStatus == GameBoard.eBoardStatus.Draw)
                 {
                     DeclareDraw();
                 }
+                if (m_FormGameOver.DialogResult == DialogResult.Cancel)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    initializeComponent();
+                }
+            }
+        }
+
+        private void increasePlayerScore(string i_PlayerName)
+        {
+            if (i_PlayerName.Equals(m_FromSettings.Player1Name))
+            {
+                m_Player1Score++;
+            }
+            else
+            {
+                m_Player2Score++;
             }
         }
 
         private void DeclareDraw()
         {
-            throw new NotImplementedException();
+            m_FormGameOver.GameOverText = String.Format(
+ @"Tie!!
+Another Round?");
+            m_FormGameOver.ShowDialog();
         }
 
-        private void DeclareWinner(string text)
+        private void DeclareWinner(string i_WinnerName)
         {
-            throw new NotImplementedException();
+            m_FormGameOver.GameOverText = String.Format(
+@"{0} Won!!
+Another Round?", i_WinnerName);
+            m_FormGameOver.ShowDialog();
         }
 
 

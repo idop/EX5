@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Ex05_WinformUi
 {
-    public partial class Settings : Form
+    public partial class FormSettings : Form
     {
-        public Settings()
+        public FormSettings()
         {
             InitializeComponent();
         }

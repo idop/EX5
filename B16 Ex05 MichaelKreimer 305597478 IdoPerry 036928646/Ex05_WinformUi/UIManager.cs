@@ -8,13 +8,13 @@ namespace Ex05_WinformUi
 {
     public class UIManager
     {
-        Settings settings = new Settings();
+        FormSettings settings = new FormSettings();
         
         public UIManager()
         {
 
         }
-        public Settings Settings
+        public FormSettings Settings
         {
             get
             {
