@@ -161,11 +161,10 @@ namespace Ex05_WinformUi
             PlayerMove playerMove = m_GameManager.PlayHumanTurn(int.Parse(currentSelectedButton.Text));
             updateFormWithUserAction(currentSelectedButton, playerMove);
 
-            if (m_GameMode == GameUtils.eGameMode.PlayerVsAi)
+            if (m_GameMode == GameUtils.eGameMode.PlayerVsAi & m_TurnNumber % 2 == 1)
             {
                 this.Cursor = Cursors.WaitCursor;
-                playerMove = m_GameManager.PlayComputerTurn();
-                updateFormWithUserAction(currentSelectedButton, playerMove);
+                buttonsColumnsSelect[m_GameManager.PlayComputerTurn()].PerformClick();
                 this.Cursor = Cursors.Default;
             }
         }
@@ -173,6 +172,7 @@ namespace Ex05_WinformUi
         private void updateFormWithUserAction(Button i_CurrentSelectedButton, PlayerMove i_PlayerMove)
         {
             buttonsBoardPiece[i_PlayerMove.SelectedRow, i_PlayerMove.SelectedColumn].Text = i_PlayerMove.SquareSymbol.ToString();
+            this.Refresh();
             if (m_GameManager.IsColumnFull(i_PlayerMove.SelectedColumn))
             {
                 i_CurrentSelectedButton.Enabled = false;
