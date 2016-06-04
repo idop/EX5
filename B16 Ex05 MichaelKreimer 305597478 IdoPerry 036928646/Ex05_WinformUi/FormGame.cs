@@ -54,6 +54,8 @@ namespace Ex05_WinformUi
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Width = (m_NumberOfColumns + 2) * k_Margin + k_ColumnSelectButtonWidth * m_NumberOfColumns;
             this.Height = (m_NumberOfRows + 4) * k_Margin + k_ColumnSelectButtonHeight + k_BoardPieceButtonHeight * m_NumberOfRows + k_LabelPlayerInfoHeight;
+            this.MinimizeBox = false;
+            this.MaximizeBox = false;
             m_PlayersInfo = new PlayerInfo[2];
             m_PlayersInfo[0] = new PlayerInfo(m_FromSettings.Player1Name);
             m_PlayersInfo[1] = new PlayerInfo(m_FromSettings.Player2Name);
