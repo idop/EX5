@@ -28,13 +28,10 @@ namespace Ex05_Logic
             return  new PlayerMove(m_GameBoard.SetColumnSquare(i_NextMove, playerSquare),i_NextMove, playerSquare, m_GameBoard.BoardStatus);
         }
 
-        public PlayerMove PlayComputerTurn()
+        public int PlayComputerTurn()
         {
-            GameBoard.eBoardSquare playerSquare = GameBoard.eBoardSquare.Player2Square;
             Ai ai = new Ai();
-            int nextMove = ai.GetNextMove(m_GameBoard);
-            ++m_TurnNumber;
-            return new PlayerMove(m_GameBoard.SetColumnSquare(nextMove, playerSquare), nextMove , playerSquare, m_GameBoard.BoardStatus);
+            return ai.GetNextMove(m_GameBoard);
         }
 
         public bool IsColumnFull(int i_selectedColumn)
