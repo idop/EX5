@@ -22,13 +22,15 @@ namespace Ex05_WinformUi
                 return TextBoxPlayer1.Text;
             }
         }
+
         public string Player2Name
         {
             get
             {
-                return CheckBoxIsHuman.Checked ? TextBoxPlayer2.Text: "Computer";
+                return CheckBoxIsHuman.Checked ? TextBoxPlayer2.Text : "Computer";
             }
         }
+
         public int Rows
         {
             get
@@ -36,6 +38,7 @@ namespace Ex05_WinformUi
                 return (int)nUDRows.Value;
             }
         }
+
         public int Cols
         {
             get
@@ -43,6 +46,7 @@ namespace Ex05_WinformUi
                 return (int)nUDCols.Value;
             }
         }
+
         public bool HumanPlaying
         {
             get
@@ -56,7 +60,7 @@ namespace Ex05_WinformUi
             if (this.CheckBoxIsHuman.Checked)
             {
                 TextBoxPlayer2.Enabled = true;
-                TextBoxPlayer2.Text = String.Empty;
+                TextBoxPlayer2.Text = string.Empty;
             }
             else 
             {
@@ -104,7 +108,7 @@ namespace Ex05_WinformUi
 
         private bool isLegalNames()
         {
-            return (Player1Name != null && Player2Name != null && Player1Name != Player2Name);
+            return Player1Name != null && Player2Name != null && Player1Name != Player2Name;
         }
     }
 }

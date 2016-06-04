@@ -247,11 +247,12 @@ namespace Ex05_Logic
         private bool checkRightDiagonal(int i_LastInstertedRow, int i_LastInsertedColumn, eBoardSquare currentPlayerSquare)
         {
             bool playerWon = false;
-            int maxNumberofSquaresInARow = 0;
-            int diagonalRowIndex = getCurrentDiagoanlUpperRightRow(i_LastInstertedRow, i_LastInsertedColumn);
-            int diagonalColumnIndex = getCurrentDiagoanlUpperRightolumn(i_LastInstertedRow, i_LastInsertedColumn);
+            bool isSameSquare = true;
+            int maxNumberofSquaresInARow = 1;
+            int diagonalRowIndex = i_LastInstertedRow + 1;
+            int diagonalColumnIndex = i_LastInsertedColumn - 1;
 
-            while (diagonalRowIndex > 0 && diagonalColumnIndex < Columns && !playerWon)
+            while (diagonalRowIndex < Rows && diagonalColumnIndex >= 0 && !playerWon && isSameSquare)
             {
                 if (m_GameBoard[diagonalRowIndex, diagonalColumnIndex] == currentPlayerSquare)
                 {
@@ -259,7 +260,30 @@ namespace Ex05_Logic
                 }
                 else
                 {
-                    maxNumberofSquaresInARow = 0;
+                    isSameSquare = false;
+                }
+
+                if (maxNumberofSquaresInARow == k_NumberOfSquaresInARowNeededForVictory)
+                {
+                    playerWon = true;
+                }
+                --diagonalColumnIndex;
+                ++diagonalRowIndex;
+            }
+
+             isSameSquare = true;
+             diagonalRowIndex = i_LastInstertedRow - 1;
+             diagonalColumnIndex = i_LastInsertedColumn + 1;
+
+            while (diagonalRowIndex >= 0 && diagonalColumnIndex < Columns && !playerWon && isSameSquare)
+            {
+                if (m_GameBoard[diagonalRowIndex, diagonalColumnIndex] == currentPlayerSquare)
+                {
+                    ++maxNumberofSquaresInARow;
+                }
+                else
+                {
+                    isSameSquare = false;
                 }
 
                 if (maxNumberofSquaresInARow == k_NumberOfSquaresInARowNeededForVictory)
@@ -273,24 +297,15 @@ namespace Ex05_Logic
             return playerWon;
         }
 
-        private int getCurrentDiagoanlUpperRightolumn(int i_LastInstertedRow, int i_LastInsertedColumn)
-        {
-            return Math.Max(i_LastInsertedColumn - (Rows - i_LastInstertedRow - 1), 0);
-        }
-
-        private int getCurrentDiagoanlUpperRightRow(int i_LastInstertedRow, int i_LastInsertedColumn)
-        {
-            return Math.Min(i_LastInstertedRow + i_LastInsertedColumn, Columns - 1);
-        }
-
         private bool checkLeftDiagonal(int i_LastInstertedRow, int i_LastInsertedColumn, eBoardSquare currentPlayerSquare)
         {
             bool playerWon = false;
-            int maxNumberofSquaresInARow = 0;
-            int diagonalRowIndex = getCurrentDiagoanlUpperLeftRow(i_LastInstertedRow, i_LastInsertedColumn);
-            int diagonalColumnIndex = getCurrentDiagoanlUpperLeftColumn(i_LastInstertedRow, i_LastInsertedColumn);
+            bool isSameSquare = true;
+            int maxNumberofSquaresInARow = 1;
+            int diagonalRowIndex = i_LastInstertedRow + 1;
+            int diagonalColumnIndex = i_LastInsertedColumn + 1;
 
-            while (diagonalRowIndex < Rows && diagonalColumnIndex < Columns && !playerWon)
+            while (diagonalRowIndex < Rows && diagonalColumnIndex < Columns && !playerWon && isSameSquare)
             {
                 if (m_GameBoard[diagonalRowIndex, diagonalColumnIndex] == currentPlayerSquare)
                 {
@@ -298,7 +313,7 @@ namespace Ex05_Logic
                 }
                 else
                 {
-                    maxNumberofSquaresInARow = 0;
+                    isSameSquare = false;
                 }
 
                 if (maxNumberofSquaresInARow == k_NumberOfSquaresInARowNeededForVictory)
@@ -309,17 +324,30 @@ namespace Ex05_Logic
                 ++diagonalRowIndex;
             }
 
+            isSameSquare = true;
+            diagonalRowIndex = i_LastInstertedRow - 1;
+            diagonalColumnIndex = i_LastInsertedColumn - 1;
+
+            while (diagonalRowIndex >= 0 && diagonalColumnIndex >= 0 && !playerWon && isSameSquare)
+            {
+                if (m_GameBoard[diagonalRowIndex, diagonalColumnIndex] == currentPlayerSquare)
+                {
+                    ++maxNumberofSquaresInARow;
+                }
+                else
+                {
+                    isSameSquare = false;
+                }
+
+                if (maxNumberofSquaresInARow == k_NumberOfSquaresInARowNeededForVictory)
+                {
+                    playerWon = true;
+                }
+                --diagonalColumnIndex;
+                --diagonalRowIndex;
+            }
+
             return playerWon;
-        }
-
-        private int getCurrentDiagoanlUpperLeftColumn(int i_LastInstertedRow, int i_LastInsertedColumn)
-        {
-            return getCurrentDiagoanlUpperLeftRow(i_LastInsertedColumn, i_LastInstertedRow);
-        }
-
-        private int getCurrentDiagoanlUpperLeftRow(int i_LastInstertedRow, int i_LastInsertedColumn)
-        {
-            return Math.Max(i_LastInstertedRow - i_LastInsertedColumn, 0);
         }
 
         private bool isValidColumn(int i_ColumnIndex)

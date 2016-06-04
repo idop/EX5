@@ -7,7 +7,7 @@
 
         public PlayerInfo(string i_PlayerName)
         {
-            m_Name = i_PlayerName.Equals(System.String.Empty)? "Unnamed" : i_PlayerName;
+            m_Name = i_PlayerName.Equals(string.Empty) ? "Unnamed" : i_PlayerName;
             m_Score = 0;
         }
 

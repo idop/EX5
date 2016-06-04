@@ -10,7 +10,7 @@ using Ex05_GameUtils;
 
 namespace Ex05_WinformUi
 {
-    public partial class FormGame : Form
+    public class FormGame : Form
     {
         private const int k_Margin = 20;
         private const int k_ColumnSelectButtonWidth = 40;
@@ -28,7 +28,6 @@ namespace Ex05_WinformUi
         private FormSettings m_FromSettings;
         private GameUtils.eGameMode m_GameMode;
         private GameManager m_GameManager;
-
 
         public FormGame()
         {
@@ -52,14 +51,14 @@ namespace Ex05_WinformUi
             m_GameMode = m_FromSettings.HumanPlaying ? GameUtils.eGameMode.PlayerVsPlayer : GameUtils.eGameMode.PlayerVsAi;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Width = (m_NumberOfColumns + 2) * k_Margin + k_ColumnSelectButtonWidth * m_NumberOfColumns;
-            this.Height = (m_NumberOfRows + 4) * k_Margin + k_ColumnSelectButtonHeight + k_BoardPieceButtonHeight * m_NumberOfRows + k_LabelPlayerInfoHeight;
+            this.Width = ((m_NumberOfColumns + 2) * k_Margin) + (k_ColumnSelectButtonWidth * m_NumberOfColumns);
+            this.Height = ((m_NumberOfRows + 4) * k_Margin) + k_ColumnSelectButtonHeight + (k_BoardPieceButtonHeight * m_NumberOfRows) + k_LabelPlayerInfoHeight;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
+            this.Text = "4 in a Raw !!";
             m_PlayersInfo = new PlayerInfo[2];
             m_PlayersInfo[0] = new PlayerInfo(m_FromSettings.Player1Name);
             m_PlayersInfo[1] = new PlayerInfo(m_FromSettings.Player2Name);
-
         }
 
         private void initializePlayerInfoLabels()
@@ -68,7 +67,7 @@ namespace Ex05_WinformUi
             m_LabelPlayerInfo[0] = new Label();
             m_LabelPlayerInfo[0].Text = m_PlayersInfo[0].ToString();
             m_LabelPlayerInfo[0].Height = k_LabelPlayerInfoHeight;
-            m_LabelPlayerInfo[0].Top = this.Height - k_Margin*2 - k_LabelPlayerInfoHeight;
+            m_LabelPlayerInfo[0].Top = this.Height - (k_Margin * 2) - k_LabelPlayerInfoHeight;
             m_LabelPlayerInfo[0].TextAlign = ContentAlignment.TopRight;
             m_LabelPlayerInfo[0].Width = k_LabelPlayerInfoWidth;
 
@@ -81,7 +80,7 @@ namespace Ex05_WinformUi
 
             m_LabelPlayerInfo[0].Left = (this.Width / 2) - k_Margin - m_LabelPlayerInfo[0].Width;
             this.Controls.Add(m_LabelPlayerInfo[0]);
-            m_LabelPlayerInfo[1].Left = m_LabelPlayerInfo[0].Left + k_Margin+ k_LabelPlayerInfoWidth;
+            m_LabelPlayerInfo[1].Left = m_LabelPlayerInfo[0].Left + k_Margin + k_LabelPlayerInfoWidth;
             this.Controls.Add(m_LabelPlayerInfo[1]);
         }
 
@@ -102,17 +101,17 @@ namespace Ex05_WinformUi
         private void initializeButtonsBoardPiece()
         {
             buttonsBoardPiece = new Button[m_NumberOfRows, m_NumberOfColumns];
-            for (int i = m_NumberOfRows - 1; i >= 0 ; --i)
+            for (int i = m_NumberOfRows - 1; i >= 0; --i)
             {
-                for (int j = m_NumberOfColumns - 1; j >= 0 ; --j)
+                for (int j = m_NumberOfColumns - 1; j >= 0; --j)
                 {
                     buttonsBoardPiece[i, j] = new Button();
-                    buttonsBoardPiece[i, j].Top = (k_ColumnSelectButtonHeight + k_Margin) + (k_Margin) * (i + 1) + k_BoardPieceButtonHeight * i;
-                    buttonsBoardPiece[i, j].Left = k_Margin * (j + 1) + k_ColumnSelectButtonWidth * j;
+                    buttonsBoardPiece[i, j].Top = (k_ColumnSelectButtonHeight + k_Margin) + (k_Margin * (i + 1)) + (k_BoardPieceButtonHeight * i);
+                    buttonsBoardPiece[i, j].Left = (k_Margin * (j + 1)) + (k_ColumnSelectButtonWidth * j);
                     buttonsBoardPiece[i, j].Width = k_ColumnSelectButtonWidth;
                     buttonsBoardPiece[i, j].Height = k_BoardPieceButtonHeight;
                     buttonsBoardPiece[i, j].Cursor = Cursors.No;
-                    buttonsBoardPiece[i, j].Font = new Font("Calibri", 14, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    buttonsBoardPiece[i, j].Font = new Font("Calibri", 14, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, (byte) 0);
                     buttonsBoardPiece[i, j].Enabled = false;
                     this.Controls.Add(buttonsBoardPiece[i, j]);
                 }
@@ -127,7 +126,7 @@ namespace Ex05_WinformUi
                 buttonsColumnsSelect[i] = new Button();
                 buttonsColumnsSelect[i].Text = string.Format("{0}", i + 1);
                 buttonsColumnsSelect[i].Top = k_Margin;
-                buttonsColumnsSelect[i].Left = k_Margin * (i + 1) + k_ColumnSelectButtonWidth * i;
+                buttonsColumnsSelect[i].Left = (k_Margin * (i + 1)) + (k_ColumnSelectButtonWidth * i);
                 buttonsColumnsSelect[i].Width = k_ColumnSelectButtonWidth;
                 buttonsColumnsSelect[i].Height = k_ColumnSelectButtonHeight;
                 buttonsColumnsSelect[i].Click += buttonColumnSelect_Click;
@@ -137,7 +136,6 @@ namespace Ex05_WinformUi
 
         private void buttonColumnSelect_Click(object sender, EventArgs e)
         {
-
             Button currentSelectedButton = sender as Button;
             PlayerMove playerMove = m_GameManager.PlayHumanTurn(int.Parse(currentSelectedButton.Text));
             updateFormWithUserAction(currentSelectedButton, playerMove);
@@ -158,6 +156,7 @@ namespace Ex05_WinformUi
             {
                 i_CurrentSelectedButton.Enabled = false;
             }
+
             checkBoardStatus(i_PlayerMove.GameStatus);
             m_TurnNumber++;
         }
@@ -179,6 +178,7 @@ namespace Ex05_WinformUi
                 {
                     playerWantsToPlayAgain = declareDraw();
                 }
+
                 if (playerWantsToPlayAgain == DialogResult.No)
                 {
                     Application.Exit();
@@ -192,10 +192,10 @@ namespace Ex05_WinformUi
 
         private void resetGame()
         {
+            m_TurnNumber = 0;
             m_GameManager.ResetGame();
             resetButtonsColumnsSelect();
             resetButtonsBoardPiece();
-
         }
 
         private void resetButtonsBoardPiece()
@@ -205,7 +205,6 @@ namespace Ex05_WinformUi
                 for (int j = m_NumberOfColumns - 1; j >= 0; --j)
                 {
                     buttonsBoardPiece[i, j].Text = string.Empty;
-
                 }
             }
         }
@@ -220,23 +219,21 @@ namespace Ex05_WinformUi
 
         private DialogResult declareDraw()
         {
-            string drawMessage = String.Format(
+            string drawMessage = string.Format(
 @"Tie!!
 Another Round?");
             DialogResult dialogResult = MessageBox.Show(drawMessage, "A Tie!", MessageBoxButtons.YesNo);
             return dialogResult;
-
         }
 
         private DialogResult declareWinner(string i_WinnerName)
         {
-            string playerWonMessage = String.Format(
+            string playerWonMessage = string.Format(
  @"{0} Won!!
-Another Round?", i_WinnerName);
+Another Round?", 
+ i_WinnerName);
             DialogResult dialogResult = MessageBox.Show(playerWonMessage, "A Win!", MessageBoxButtons.YesNo);
             return dialogResult;
         }
     }
 }
-
-

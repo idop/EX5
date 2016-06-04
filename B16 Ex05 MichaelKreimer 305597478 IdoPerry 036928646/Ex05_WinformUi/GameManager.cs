@@ -1,8 +1,4 @@
 ﻿using Ex05_GameUtils;
-using Ex05_WinformUi;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 
 namespace Ex05_Logic
 {
@@ -12,13 +8,13 @@ namespace Ex05_Logic
         private GameUtils.eGameMode m_GameMode;
         private int m_TurnNumber = 0;
 
-        public GameManager(GameUtils.eGameMode i_GameMode , int i_rows, int i_Columns)
+        public GameManager(GameUtils.eGameMode i_GameMode, int i_rows, int i_Columns)
         {
             m_GameMode = i_GameMode;
             m_GameBoard = new GameBoard(i_rows, i_Columns);
             m_TurnNumber = 0; 
-
         }
+
         public void ResetGameBoard()
         {
             m_GameBoard.ClearBoard();
@@ -29,7 +25,7 @@ namespace Ex05_Logic
             GameBoard.eBoardSquare playerSquare = m_TurnNumber % 2 == 0 ? GameBoard.eBoardSquare.Player1Square : GameBoard.eBoardSquare.Player2Square;
             --i_NextMove;
             m_TurnNumber++;
-            return  new PlayerMove(m_GameBoard.SetColumnSquare(i_NextMove, playerSquare),i_NextMove, playerSquare, m_GameBoard.BoardStatus);
+            return new PlayerMove(m_GameBoard.SetColumnSquare(i_NextMove, playerSquare), i_NextMove, playerSquare, m_GameBoard.BoardStatus);
         }
 
         public int PlayComputerTurn()
@@ -45,6 +41,7 @@ namespace Ex05_Logic
 
         public void ResetGame()
         {
+            m_TurnNumber = 0;
             m_GameBoard.ClearBoard();
         }
     }
