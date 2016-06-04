@@ -125,13 +125,13 @@ namespace Ex05_WinformUi
                 for (int j = m_NumberOfColumns - 1; j >= 0 ; --j)
                 {
                     buttonsBoardPiece[i, j] = new Button();
-                    int temp = (k_ColumnSelectButtonHeight + k_Margin) + (k_Margin) * (j + 1) + k_BoardPieceButtonHeight * j;
-                    buttonsBoardPiece[i, j].Top = (k_ColumnSelectButtonHeight + k_Margin) + (k_Margin) * (j + 1) + k_BoardPieceButtonHeight * j;
-                    buttonsBoardPiece[i, j].Left = k_Margin * (i + 1) + k_ColumnSelectButtonWidth * i;
+                    buttonsBoardPiece[i, j].Top = (k_ColumnSelectButtonHeight + k_Margin) + (k_Margin) * (i + 1) + k_BoardPieceButtonHeight * i;
+                    buttonsBoardPiece[i, j].Left = k_Margin * (j + 1) + k_ColumnSelectButtonWidth * j;
                     buttonsBoardPiece[i, j].Width = k_ColumnSelectButtonWidth;
                     buttonsBoardPiece[i, j].Height = k_BoardPieceButtonHeight;
+                    buttonsBoardPiece[i, j].Cursor = Cursors.No;
+                    buttonsBoardPiece[i, j].Font = new Font("Calibri", 14, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                     buttonsBoardPiece[i, j].Enabled = false;
-                    buttonsBoardPiece[i, j].FlatStyle = FlatStyle.Flat;
                     this.Controls.Add(buttonsBoardPiece[i, j]);
                 }
             }
@@ -162,8 +162,10 @@ namespace Ex05_WinformUi
 
             if (m_GameMode == GameUtils.eGameMode.PlayerVsAi)
             {
+                this.Cursor = Cursors.WaitCursor;
                 playerMove = m_GameManager.PlayComputerTurn();
                 updateFormWithUserAction(currentSelectedButton, playerMove);
+                this.Cursor = Cursors.Default;
             }
         }
 
@@ -205,5 +207,7 @@ namespace Ex05_WinformUi
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

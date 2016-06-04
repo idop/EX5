@@ -14,7 +14,7 @@ namespace Ex05_Logic
         public PlayerMove(int i_SelectedRow, int i_SelectedColumn, GameBoard.eBoardSquare i_PlayerSquare, GameBoard.eBoardStatus i_GameStatus)
         {
             m_SelectedRow = i_SelectedRow;
-            m_SelectedColumn = i_SelectedColumn -1 ;
+            m_SelectedColumn = i_SelectedColumn;
             m_PlayerSquareSymbol = (char) i_PlayerSquare;
             m_GameStatus = i_GameStatus;
         }
