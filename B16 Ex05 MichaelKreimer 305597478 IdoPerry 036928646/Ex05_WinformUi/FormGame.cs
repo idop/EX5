@@ -16,15 +16,12 @@ namespace Ex05_WinformUi
         private const int k_ColumnSelectButtonWidth = 40;
         private const int k_ColumnSelectButtonHeight = 30;
         private const int k_BoardPieceButtonHeight = 40;
-        private const int k_LabelHeight = 30;
-        private const int k_LabelScoreWidth = 30;
-        private const int k_LabelPlayerNameWidth = 40;
+        private const int k_LabelPlayerInfoHeight = 30;
+        private const int k_LabelPlayerInfoWidth = 120;
         private Button[] buttonsColumnsSelect;
         private Button[,] buttonsBoardPiece;
-        private Label[] m_LabelPlayerName;
-        private Label[] m_LabelPlayerScore;
-        private int m_Player1Score;
-        private int m_Player2Score;
+        private Label[] m_LabelPlayerInfo;
+        private PlayerInfo[] m_PlayersInfo;
         private int m_NumberOfRows;
         private int m_NumberOfColumns;
         private int m_TurnNumber = 0;
@@ -52,55 +49,38 @@ namespace Ex05_WinformUi
         {
             m_NumberOfRows = m_FromSettings.Rows;
             m_NumberOfColumns = m_FromSettings.Cols;
-            m_Player1Score = 0;
-            m_Player2Score = 0;
             m_GameMode = m_FromSettings.HumanPlaying ? GameUtils.eGameMode.PlayerVsPlayer : GameUtils.eGameMode.PlayerVsAi;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Width = (m_NumberOfColumns + 2) * k_Margin + k_ColumnSelectButtonWidth * m_NumberOfColumns;
-            this.Height = (m_NumberOfRows + 4) * k_Margin + k_ColumnSelectButtonHeight + k_BoardPieceButtonHeight * m_NumberOfRows + k_LabelHeight;
+            this.Height = (m_NumberOfRows + 4) * k_Margin + k_ColumnSelectButtonHeight + k_BoardPieceButtonHeight * m_NumberOfRows + k_LabelPlayerInfoHeight;
+            m_PlayersInfo = new PlayerInfo[2];
+            m_PlayersInfo[0] = new PlayerInfo(m_FromSettings.Player1Name);
+            m_PlayersInfo[1] = new PlayerInfo(m_FromSettings.Player2Name);
+
         }
 
         private void initializePlayerInfoLabels()
         {
-            m_LabelPlayerName = new Label[2];
-            m_LabelPlayerName[0] = new Label();
-            m_LabelPlayerName[0].Text = m_FromSettings.Player1Name + ":";
-            m_LabelPlayerName[0].Height = k_LabelHeight;
-            m_LabelPlayerName[0].Top = this.Height - k_Margin*2 - k_LabelHeight;
-            m_LabelPlayerName[0].TextAlign = ContentAlignment.TopRight;
-            m_LabelPlayerName[0].Width = this.Width / 2 - k_Margin - k_LabelScoreWidth;
+            m_LabelPlayerInfo = new Label[2];
+            m_LabelPlayerInfo[0] = new Label();
+            m_LabelPlayerInfo[0].Text = m_PlayersInfo[0].ToString();
+            m_LabelPlayerInfo[0].Height = k_LabelPlayerInfoHeight;
+            m_LabelPlayerInfo[0].Top = this.Height - k_Margin*2 - k_LabelPlayerInfoHeight;
+            m_LabelPlayerInfo[0].TextAlign = ContentAlignment.TopRight;
+            m_LabelPlayerInfo[0].Width = k_LabelPlayerInfoWidth;
 
-            m_LabelPlayerName[1] = new Label();
-            m_LabelPlayerName[1].Text = m_FromSettings.Player2Name + ":";
-            m_LabelPlayerName[1].Height = k_LabelHeight;
-            m_LabelPlayerName[1].Top = m_LabelPlayerName[0].Top;
-            m_LabelPlayerName[1].TextAlign = ContentAlignment.TopRight;
-            m_LabelPlayerName[1].Width = m_LabelPlayerName[0].Width;
+            m_LabelPlayerInfo[1] = new Label();
+            m_LabelPlayerInfo[1].Text = m_PlayersInfo[1].ToString();
+            m_LabelPlayerInfo[1].Height = k_LabelPlayerInfoHeight;
+            m_LabelPlayerInfo[1].Top = m_LabelPlayerInfo[0].Top;
+            m_LabelPlayerInfo[1].TextAlign = ContentAlignment.TopLeft;
+            m_LabelPlayerInfo[1].Width = k_LabelPlayerInfoWidth;
 
-            m_LabelPlayerScore = new Label[2];
-            m_LabelPlayerScore[0] = new Label();
-            m_LabelPlayerScore[0].Text = m_Player1Score.ToString();
-            m_LabelPlayerScore[0].Height = k_LabelHeight;
-            m_LabelPlayerScore[0].Width = k_LabelScoreWidth;
-            m_LabelPlayerScore[0].Top = m_LabelPlayerName[0].Top;
-            m_LabelPlayerScore[0].TextAlign = ContentAlignment.TopLeft;
-
-            m_LabelPlayerScore[1] = new Label();
-            m_LabelPlayerScore[1].Text = m_Player2Score.ToString();
-            m_LabelPlayerScore[1].Height = k_LabelHeight;
-            m_LabelPlayerScore[1].Width = k_LabelScoreWidth;
-            m_LabelPlayerScore[1].Top = m_LabelPlayerName[0].Top;
-            m_LabelPlayerScore[1].TextAlign = ContentAlignment.TopLeft;
-
-            m_LabelPlayerName[0].Left = Math.Max((this.Width / 2) - k_Margin - m_LabelPlayerName[0].Width - m_LabelPlayerScore[0].Width, 0);
-            this.Controls.Add(m_LabelPlayerName[0]);
-            m_LabelPlayerScore[0].Left = m_LabelPlayerName[0].Left + m_LabelPlayerName[0].Width + 5;
-            this.Controls.Add(m_LabelPlayerScore[0]);
-            m_LabelPlayerName[1].Left = m_LabelPlayerScore[0].Left + m_LabelPlayerScore[0].Width + k_Margin;
-            this.Controls.Add(m_LabelPlayerName[1]);
-            m_LabelPlayerScore[1].Left = m_LabelPlayerName[1].Left + m_LabelPlayerName[1].Width ;
-            this.Controls.Add(m_LabelPlayerScore[1]);
+            m_LabelPlayerInfo[0].Left = (this.Width / 2) - k_Margin - m_LabelPlayerInfo[0].Width;
+            this.Controls.Add(m_LabelPlayerInfo[0]);
+            m_LabelPlayerInfo[1].Left = m_LabelPlayerInfo[0].Left + k_Margin+ k_LabelPlayerInfoWidth;
+            this.Controls.Add(m_LabelPlayerInfo[1]);
         }
 
         private void initializeComponents()
@@ -187,8 +167,11 @@ namespace Ex05_WinformUi
             {
                 if (i_gameStatus == GameBoard.eBoardStatus.PlayerWon)
                 {
-                    m_LabelPlayerScore[m_TurnNumber % 2].Text = string.Format("{0}",int.Parse(m_LabelPlayerScore[m_TurnNumber % 2].Text) +1);
-                    DeclareWinner(m_LabelPlayerName[m_TurnNumber % 2].Text);
+                    int playerNumber = m_TurnNumber % 2;
+                    m_PlayersInfo[playerNumber].Score += 1;
+                    m_LabelPlayerInfo[playerNumber].Text = m_PlayersInfo[playerNumber].ToString();
+                    this.Refresh();
+                    DeclareWinner(m_PlayersInfo[playerNumber].Name);
 
                 }
                 else if (i_gameStatus == GameBoard.eBoardStatus.Draw)

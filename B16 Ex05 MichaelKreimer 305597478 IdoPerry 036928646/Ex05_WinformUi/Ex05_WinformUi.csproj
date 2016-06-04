@@ -45,9 +45,6 @@
     <Compile Include="FormGame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormGame.Designer.cs">
-      <DependentUpon>FormGame.cs</DependentUpon>
-    </Compile>
     <Compile Include="GameManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Settings.cs">
@@ -62,7 +59,6 @@
     <Compile Include="SettingsOld.Designer.cs">
       <DependentUpon>SettingsOld.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ex05_GameUtils\Ex05_GameUtils.csproj">
@@ -75,9 +71,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormGame.resx">
-      <DependentUpon>FormGame.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>

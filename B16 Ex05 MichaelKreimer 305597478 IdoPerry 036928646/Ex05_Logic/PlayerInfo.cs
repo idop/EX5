@@ -36,5 +36,10 @@
                 m_Score = value;
             }
         }
+
+        public override string ToString()
+        {
+            return m_Name + ": " + m_Score;
+        }
     }
 }
