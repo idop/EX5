@@ -67,6 +67,7 @@ namespace Ex05_WinformUi
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.OK;
             this.Close();
             /* try
             {

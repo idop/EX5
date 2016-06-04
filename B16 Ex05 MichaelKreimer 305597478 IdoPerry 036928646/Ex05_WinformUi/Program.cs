@@ -1,5 +1,4 @@
-﻿
-using Ex05_Logic;
+﻿using System.Windows.Forms;
 
 namespace Ex05_WinformUi
 {
@@ -8,7 +7,10 @@ namespace Ex05_WinformUi
         public static void Main()
         {
             FormGame game = new FormGame();
-            game.ShowDialog();
+            if (game.DialogResult == DialogResult.OK)
+            {
+                game.ShowDialog();
+            }
         }
     }
 }

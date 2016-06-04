@@ -37,7 +37,15 @@ namespace Ex05_WinformUi
         {
             m_FromSettings = new Settings();
             m_FromSettings.ShowDialog();
-            initializeComponents();
+            if (m_FromSettings.DialogResult == DialogResult.OK)
+            {
+                initializeComponents();
+                DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                DialogResult = DialogResult.Abort;
+            }
         }
 
         private void initizliseGameSettingsValues()
