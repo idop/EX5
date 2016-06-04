@@ -25,14 +25,14 @@ namespace Ex05_WinformUi
         private int m_NumberOfRows;
         private int m_NumberOfColumns;
         private int m_TurnNumber = 0;
-        private Settings m_FromSettings;
+        private FormSettings m_FromSettings;
         private GameUtils.eGameMode m_GameMode;
         private GameManager m_GameManager;
 
 
         public FormGame()
         {
-            m_FromSettings = new Settings();
+            m_FromSettings = new FormSettings();
             m_FromSettings.ShowDialog();
             if (m_FromSettings.DialogResult == DialogResult.OK)
             {
@@ -178,19 +178,58 @@ namespace Ex05_WinformUi
                 {
                     DeclareDraw();
                 }
+                if (m_FormGameOver.DialogResult == DialogResult.Cancel)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    resetGame();
+                }
+            }
+        }
+
+        private void resetGame()
+        {
+            m_GameManager.ResetGame();
+            resetButtonsColumnsSelect();
+            for (int i = m_NumberOfRows - 1; i >= 0; --i)
+            {
+                for (int j = m_NumberOfColumns - 1; j >= 0; --j)
+                {
+                    buttonsBoardPiece[i, j].Text = string.Empty;
+
+                }
+            }
+
+        }
+
+        private void resetButtonsColumnsSelect()
+        {
+            for (int i = 0; i < m_NumberOfColumns; i++)
+            {
+                buttonsColumnsSelect[i].Enabled = true;
             }
         }
 
         private void DeclareDraw()
         {
-            throw new NotImplementedException();
+            m_FormGameOver.GameOverText = string.Format(
+        @"Tie!!
+Another Round?");
+            m_FormGameOver.ShowDialog();
         }
 
-        private void DeclareWinner(string text)
+        private void DeclareWinner(string i_WinnerName)
         {
-            throw new NotImplementedException();
+            m_FormGameOver.GameOverText = string.Format(
+        @"{0} Won!!
+Another Round?", i_WinnerName);
+            m_FormGameOver.ShowDialog();
         }
 
 
     }
 }
+
+

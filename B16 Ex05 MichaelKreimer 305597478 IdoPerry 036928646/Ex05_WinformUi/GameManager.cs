@@ -38,5 +38,10 @@ namespace Ex05_Logic
         {
             return m_GameBoard.IsColumnFull(i_selectedColumn);
         }
+
+        public void ResetGame()
+        {
+            m_GameBoard.ClearBoard();
+        }
     }
 }
