@@ -153,6 +153,26 @@ namespace Ex05_WinformUi
                 this.Controls.Add(buttonsColumnsSelect[i]);
             }
         }
+        private void resetAllComponents()
+        {
+            clearGUIBoard();
+            for (int i = 0; i < m_NumberOfColumns; ++i)
+            {
+                buttonsColumnsSelect[i].Enabled = true;
+            }
+            m_GameManager.ResetGameBoard();
+        }
+
+        private void clearGUIBoard()
+        {
+            for (int i = m_NumberOfRows - 1; i >= 0; --i)
+            {
+                for (int j = m_NumberOfColumns - 1; j >= 0; --j)
+                {
+                    buttonsBoardPiece[i, j].Text = String.Empty;
+                }
+            }
+        }
 
         private void buttonColumnSelect_Click(object sender, EventArgs e)
         {
@@ -202,9 +222,9 @@ namespace Ex05_WinformUi
                 {
                     Application.Exit();
                 }
-                else
+                else if (m_FormGameOver.DialogResult == DialogResult.OK)
                 {
-                    initializeComponent();
+                    resetAllComponents();
                 }
             }
         }
