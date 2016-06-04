@@ -19,6 +19,10 @@ namespace Ex05_Logic
             m_TurnNumber = 0; 
 
         }
+        public void ResetGameBoard()
+        {
+            m_GameBoard.ClearBoard();
+        }
      
         public PlayerMove PlayHumanTurn(int i_NextMove)
         {
